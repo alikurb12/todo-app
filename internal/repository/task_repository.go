@@ -50,7 +50,7 @@ func (r *TaskRepository) GetALL(ctx context.Context) ([]model.Task, error) {
 	return tasks, nil
 }
 
-func (r *TaskRepository) GetById(id int64, ctx context.Context) (*model.Task, error) {
+func (r *TaskRepository) GetById(ctx context.Context, id int64,) (*model.Task, error) {
 	var task model.Task
 	err := r.db.QueryRow(ctx, "SELECT (*) FROM tasks WHERE id = $1", id).
 		Scan(
