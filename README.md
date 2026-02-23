@@ -192,9 +192,3 @@ Repository  — database operations
     ↓
 PostgreSQL
 ```
-
----
-
-## 📄 License
-
-MIT
