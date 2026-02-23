@@ -86,7 +86,7 @@ func (h *TaskHandler) DeleteTask(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err = h.service.DeleteTask(r.Context(), id); err != nil {
-		http.Error(w, "Invalid task ID", http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

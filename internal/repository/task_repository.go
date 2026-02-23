@@ -20,7 +20,7 @@ func NewTaskRepository(db *pgxpool.Pool) *TaskRepository {
 func (r *TaskRepository) GetALL(ctx context.Context) ([]model.Task, error) {
 	rows, err := r.db.Query(
 		ctx,
-		"SELECT (*) FROM tasks ORDER BY id",
+		"SELECT * FROM tasks ORDER BY id",
 	)
 	if err != nil {
 		return nil, err
@@ -50,9 +50,9 @@ func (r *TaskRepository) GetALL(ctx context.Context) ([]model.Task, error) {
 	return tasks, nil
 }
 
-func (r *TaskRepository) GetById(ctx context.Context, id int64,) (*model.Task, error) {
+func (r *TaskRepository) GetById(ctx context.Context, id int64) (*model.Task, error) {
 	var task model.Task
-	err := r.db.QueryRow(ctx, "SELECT (*) FROM tasks WHERE id = $1", id).
+	err := r.db.QueryRow(ctx, "SELECT * FROM tasks WHERE id = $1", id).
 		Scan(
 			&task.ID,
 			&task.Title,
@@ -87,7 +87,7 @@ func (r *TaskRepository) Update(ctx context.Context, task *model.Task) error {
 }
 
 func (r *TaskRepository) Delete(ctx context.Context, id int64) error {
-	query := `DELETE tasks WHERE id=$1`
+	query := `DELETE FROM tasks WHERE id=$1`
 	_, err := r.db.Exec(ctx, query, id)
 	return err
 }
